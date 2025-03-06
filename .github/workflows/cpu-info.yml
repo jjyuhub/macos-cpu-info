@@ -1,0 +1,20 @@
+name: MacOS CPU Info
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  cpu-info:
+    runs-on: macos-latest
+    steps:
+      - name: Print CPU Information
+        run: |
+          echo "System Profiler Info:"
+          system_profiler SPHardwareDataType
+          echo "Processor Info:"
+          sysctl -n machdep.cpu.brand_string
+          echo "Full CPU Details:"
+          sysctl -a | grep machdep.cpu
